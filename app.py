@@ -6,22 +6,24 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_
 
-# Create instance folder automatically
+# Create instance folder automatically for SQLite (local testing)
 instance_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'instance'))
 os.makedirs(instance_path, exist_ok=True)
 
 # Initialize Flask app
 app = Flask(__name__, instance_path=instance_path)
 
-# Correct absolute path to the database
+# Upload Folder (use Render Disk path for production)
+app.config['UPLOAD_FOLDER'] = '/app/static/uploads' if os.environ.get('RENDER') else os.path.join(os.path.dirname(__file__), 'static', 'Uploads')
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+# Database configuration (PostgreSQL for Render, SQLite fallback for local)
 db_path = os.path.join(instance_path, 'lab.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', f'sqlite:///{db_path}')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Flask configuration
-app.config['SECRET_KEY'] = 'a8f9e9b0a3c14e29a6d42f8d931f7cfa4be67829b5761a5e9f17c3d2e456c891'
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
-app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'static', 'Uploads')
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6')
 app.config['ALLOWED_EXTENSIONS'] = {'pdf'}
 
 # Initialize extensions
@@ -292,9 +294,18 @@ def history():
 def locations():
     return render_template('locations.html')
 
-# Initialize database
+# Initialize database and create admin user
 with app.app_context():
     db.create_all()
+    if not User.query.filter_by(email="admin@example.com").first():
+        admin = User(
+            email="admin@example.com",
+            username="admin",
+            password=generate_password_hash("Admin@2025", method='pbkdf2:sha256'),
+            is_admin=True
+        )
+        db.session.add(admin)
+        db.session.commit()
 
 # Run the app
 if __name__ == '__main__':
