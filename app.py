@@ -13,11 +13,11 @@ os.makedirs(instance_path, exist_ok=True)
 # Initialize Flask app
 app = Flask(__name__, instance_path=instance_path)
 
-# Upload Folder (use Render Disk path for production)
-app.config['UPLOAD_FOLDER'] = '/app/static/uploads' if os.environ.get('RENDER') else os.path.join(os.path.dirname(__file__), 'static', 'Uploads')
+# Upload Folder (use Railway volume for production, local folder for testing)
+app.config['UPLOAD_FOLDER'] = '/uploads' if os.environ.get('RAILWAY_ENVIRONMENT') else os.path.join(os.path.dirname(__file__), 'static', 'Uploads')
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# Database configuration (PostgreSQL for Render, SQLite fallback for local)
+# Database configuration (PostgreSQL for Railway, SQLite fallback for local)
 db_path = os.path.join(instance_path, 'lab.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', f'sqlite:///{db_path}')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -309,4 +309,4 @@ with app.app_context():
 
 # Run the app
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
