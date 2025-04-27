@@ -1,0 +1,329 @@
+/* General Styles */
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #f4f7fa;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Header */
+header {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+header .navbar-brand img {
+  transition: transform 0.3s ease;
+}
+
+header .navbar-brand img:hover {
+  transform: rotate(5deg) scale(1.1);
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+nav ul li {
+  margin: 0 20px;
+  position: relative;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+nav ul li a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #e0e7ff;
+  transform: translateY(-2px);
+}
+
+nav ul li a.active {
+  background: #0056b3;
+  color: #fff;
+}
+
+/* Greeting */
+.greeting {
+  color: #fff;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-right: 20px;
+}
+
+.greeting .user-id {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* Main Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Forms */
+form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #0056b3;
+}
+
+.form-control,
+.form-select {
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 12px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+/* Delete Button */
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+  padding: 8px 12px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  transform: scale(1.02);
+}
+
+/* Search Form */
+.search-form {
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+
+.search-form .input-group {
+  width: 100%;
+}
+
+.search-form .form-control {
+  border-radius: 5px 0 0 5px;
+}
+
+.search-form .btn-primary {
+  border-radius: 0 5px 5px 0;
+}
+
+/* Password Change Form */
+.password-change-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Admin Reset Password Form */
+.reset-password-form {
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+/* Alerts */
+.alert {
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 15px;
+  font-weight: 500;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.alert-warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+/* Password Requirements */
+#password-requirements {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+#password-requirements ul {
+  list-style: none;
+  padding: 0;
+}
+
+#password-requirements li {
+  margin: 5px 0;
+}
+
+#password-requirements .valid {
+  color: #28a745;
+}
+
+#password-requirements .invalid {
+  color: #dc3545;
+}
+
+/* Admin Page Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+th {
+  background: #007bff;
+  color: #fff;
+  font-weight: 600;
+}
+
+tr:hover {
+  background: #f8f9fa;
+}
+
+/* Footer */
+footer {
+  background: #343a40;
+  color: #fff;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+
+  .greeting {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  form {
+    padding: 20px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .search-form {
+    max-width: 100%;
+  }
+
+  .password-change-form,
+  .reset-password-form {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  header .navbar-brand {
+    margin-bottom: 10px;
+  }
+
+  nav ul li a {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 10px;
+  }
+
+  .greeting .user-id {
+    font-size: 0.75rem;
+  }
+
+  .btn-sm {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+}
